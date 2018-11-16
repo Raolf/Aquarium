@@ -1,26 +1,10 @@
 
 
 var fish = document.getElementById("fish1Id");
-$(fish).animate({width: '188', height:'188'});
-
+var blueFish = document.getElementById("fish2Id");
+var blue = false;
 Run();
 
-
-function Run() {
-
-    var fish = document.getElementById("fish1Id");
-    BlueFish();
-    $(fish).stop();
-    Bubble();
-    $(fish).dblclick(function () {
-        var fish = document.getElementById("fish1Id");
-        $(fish).stop();
-        $(fish).animate({left:'-=94', width: '376', top:'-=94', height:'376'}).delay(2000).animate({left:'+=94', width: '188', top:'+=94', height:'188'});
-        
-    });
-    OrangeIdle().delay(1000);
-    Run();
-}
 
 function Bubble() {
 
@@ -32,26 +16,61 @@ function Bubble() {
     $(bubble).positionY = window.innerHeight;
     $(bubble).animate({top:'-=180'});
 }
+
 function OrangeIdle() {
     var fish = document.getElementById("fish1Id");
     var y = Math.random()*(window.innerHeight-188);
     var x = Math.random()*(window.innerWidth-188);
-    //$(fish).animate({top:'-=0',left:'-=0'});
     $(fish).animate({top:y,left:x},"slow");
 }
-function OrangeDblClick() {
 
-
+function BlueCheck() {
+    setInterval(BlueFish(),4000);
+    return;
 }
 
 function BlueFish() {
-    var blueFish = document.getElementById("fish2Id");
-    $(blueFish).mouseover(function () {
-        var blueFish = document.getElementById("fish2Id");
-        var y = Math.random()*(window.innerHeight-188);
-        var x = Math.random()*(window.innerWidth-188);
-        $(blueFish).animate({top:y,left:x})
+    var y = Math.random()*(window.innerHeight-188);
+    var x = Math.random()*(window.innerWidth-188);
+
+    //alert("Ran")
+
+    if(blue === true) {
+        $(blueFish).animate({top:y,left:x}, 500);
+        //alert("true");
+        blue = false;
+    } else {
+        $(blueFish).animate({top:y,left:x},3000);
+    }
+    //BlueCheck();
+    //return;
+}
+
+function Run() {
+
+    $(fish).stop();
+    Bubble();
+    $(fish).dblclick(function () {
+        var fish = document.getElementById("fish1Id");
+        $(fish).stop();
+        $(fish).animate({left:'-=94', width: '376', top:'-=94', height:'376'}).delay(2000).animate({left:'+=94', width: '188', top:'+=94', height:'188'});
+
+    });
+
+    $(blueFish).mouseenter(function () {
+        blue = true;
+        //alert("over " + blue)
     })
 
+    BlueFish();
+    setInterval(function () {
+        BlueFish();
+    },4000);
+
+    OrangeIdle().delay(1000);
+    //Run();
+
 }
+
+
 

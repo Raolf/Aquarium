@@ -22,6 +22,7 @@ function OrangeIdle() {
     var y = Math.random()*(window.innerHeight-188);
     var x = Math.random()*(window.innerWidth-188);
     $(fish).animate({top:y,left:x},"slow");
+    $(bubble).animate({top: '-=180'});
 }
 
 function BlueCheck() {
@@ -74,3 +75,4 @@ function Run() {
 
 
 
+}
